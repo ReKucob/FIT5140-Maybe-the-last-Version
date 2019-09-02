@@ -16,7 +16,7 @@ class LocationTableViewController: UITableViewController, NewLocationDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         //Location 1
         var location = LocationAnnotation(newTitle: "Melbourne Museum", newSubtitle: "A natural and cultural history museum located in the Carlton Gardens in Melbourne", lat: -37.8033, long: 144.9717)
         locationList.append(location)
@@ -91,6 +91,7 @@ class LocationTableViewController: UITableViewController, NewLocationDelegate {
         location = LocationAnnotation(newTitle: "The Scots' Church", newSubtitle: "It was the first Presbyterian church to be built in the Port Phillip District and is located on Collins Street.", lat: -37.8146, long: 144.9685)
         locationList.append(location)
         viewController?.mapView.addAnnotation(location)
+
         
     }
     

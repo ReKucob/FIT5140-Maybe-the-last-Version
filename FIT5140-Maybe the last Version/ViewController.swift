@@ -11,13 +11,17 @@ import MapKit
 
 class ViewController: UIViewController {
 
- 
+    var showAnnotation: LocationTableViewController?
+    
     @IBOutlet weak var mapView: MKMapView!
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
 
+        showAnnotation?.viewDidLoad()
         centerMapLocation(location: initialLocation)
+        
+        
     }
     
     let initialLocation = CLLocation(latitude: -37.8124, longitude: 144.9623)
@@ -37,6 +41,8 @@ class ViewController: UIViewController {
         mapView.setRegion(newCenter, animated: true)
     }
 
+   
+    
 
 }
 
