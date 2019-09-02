@@ -79,6 +79,7 @@ class NewLocationViewController: UIViewController, CLLocationManagerDelegate {
         {
             let location = LocationAnnotation(newTitle: titleTextView.text!, newSubtitle: descriptionTextField.text!, lat: Double(latitudeTextView.text!)!, long: Double(longitudeTextView.text!)!)
             delegate?.locationAnnotationAdded(annotation: location)
+            navigationController?.popViewController(animated: true)
             
         }
         
