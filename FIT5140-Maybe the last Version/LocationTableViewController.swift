@@ -8,11 +8,13 @@
 
 import UIKit
 import MapKit
+import CoreData
 
 class LocationTableViewController: UITableViewController, NewLocationDelegate {
 
     var viewController: ViewController?
     var locationList = [LocationAnnotation]()
+    var historicalLocation: [NSManagedObject] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,11 +48,11 @@ class LocationTableViewController: UITableViewController, NewLocationDelegate {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "locationCell", for: indexPath)
-        let annotation = self.locationList[indexPath.row]
+        let hisLocation = historicalLocation[indexPath.row]
         
         //set text into the table cell
-        cell.textLabel?.text = annotation.title
-        cell.detailTextLabel?.text = annotation.subtitle
+        cell.textLabel?.text = (hisLocation.value(forKeyPath: "locationName") as! String)
+        cell.detailTextLabel?.text = (hisLocation.value(forKeyPath: "locationDescription") as! String)
 
         return cell
     }

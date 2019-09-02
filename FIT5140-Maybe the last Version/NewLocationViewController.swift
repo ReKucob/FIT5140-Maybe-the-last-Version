@@ -8,6 +8,7 @@
 
 import UIKit
 import MapKit
+import CoreData
 
 protocol NewLocationDelegate{
     func locationAnnotationAdded(annotation: LocationAnnotation)
@@ -15,6 +16,7 @@ protocol NewLocationDelegate{
 
 class NewLocationViewController: UIViewController, CLLocationManagerDelegate {
     
+    var historicalLocation: [NSManagedObject] = []
     
     @IBOutlet weak var titleTextView: UITextField!
     @IBOutlet weak var descriptionTextField: UITextField!
@@ -77,10 +79,14 @@ class NewLocationViewController: UIViewController, CLLocationManagerDelegate {
         }
         else
         {
-            let location = LocationAnnotation(newTitle: titleTextView.text!, newSubtitle: descriptionTextField.text!, lat: Double(latitudeTextView.text!)!, long: Double(longitudeTextView.text!)!)
-            delegate?.locationAnnotationAdded(annotation: location)
+            self.save(locationName: titleTextView.text!, locationDescription: descriptionTextField.text!, latitude: Double(latitudeTextView.text!)!, Longitude: Double(longitudeTextView.text!)!)
             navigationController?.popViewController(animated: true)
             
+            /*let location = LocationAnnotation(newTitle: titleTextView.text!, newSubtitle: descriptionTextField.text!, lat: Double(latitudeTextView.text!)!, long: Double(longitudeTextView.text!)!)
+            delegate?.locationAnnotationAdded(annotation: location)
+            */
+            
+ 
         }
         
         
@@ -93,6 +99,34 @@ class NewLocationViewController: UIViewController, CLLocationManagerDelegate {
          // Pass the selected object to the new view controller.
          }
          */
+        
+    }
+    
+    func save(locationName: String, locationDescription: String, latitude: Double, Longitude: Double)
+    {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return
+        }
+        
+        let managedContext = appDelegate.persistentContainer.viewContext
+        
+        let entity = NSEntityDescription.entity(forEntitName: "LocationsMetaData", in: managedContext)!
+        
+        let historicalLocations = NSManagedObject(entity: entity, insertInto: managedContext)
+        
+        historicalLocations.setValue(locationName, value(forKeyPath: "locationName"))
+        historicalLocations.setValue(locationDescription, value(forKeyPath: "locationDescription"))
+        historicalLocations.setValue(latitude, value(forKeyPath: "latitude"))
+        historicalLocations.setValue(Longitude, value(forKeyPath: "Longitude"))
+        
+        
+        do{
+            try managedContext.save()
+            historicalLocation.append(historicalLocations)
+        }
+        catch let error as NSError {
+            print("Cannot save. \(error), \(error.userInfo)")
+        }
         
     }
 }

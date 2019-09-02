@@ -15,6 +15,8 @@
 		60DC1C84231D323500B12F1C /* LocationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DC1C83231D323500B12F1C /* LocationTableViewController.swift */; };
 		60DC1C86231D325100B12F1C /* NewLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DC1C85231D325100B12F1C /* NewLocationViewController.swift */; };
 		60DC1C88231D327100B12F1C /* LocationAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DC1C87231D327100B12F1C /* LocationAnnotation.swift */; };
+		60DC1C8C231D516A00B12F1C /*  LocationData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 60DC1C8A231D516A00B12F1C /*  LocationData.xcdatamodeld */; };
+		60DC1C8E231D612400B12F1C /* CoreDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DC1C8D231D612400B12F1C /* CoreDataController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +49,8 @@
 		60DC1C83231D323500B12F1C /* LocationTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationTableViewController.swift; sourceTree = "<group>"; };
 		60DC1C85231D325100B12F1C /* NewLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewLocationViewController.swift; sourceTree = "<group>"; };
 		60DC1C87231D327100B12F1C /* LocationAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationAnnotation.swift; sourceTree = "<group>"; };
+		60DC1C8B231D516A00B12F1C /*  LocationData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = " LocationData.xcdatamodel"; sourceTree = "<group>"; };
+		60DC1C8D231D612400B12F1C /* CoreDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +81,7 @@
 		60DC1C49231D313100B12F1C = {
 			isa = PBXGroup;
 			children = (
+				60DC1C89231D514800B12F1C /* Data Model */,
 				60DC1C54231D313100B12F1C /* FIT5140-Maybe the last Version */,
 				60DC1C53231D313100B12F1C /* Products */,
 			);
@@ -106,6 +111,15 @@
 				60DC1C87231D327100B12F1C /* LocationAnnotation.swift */,
 			);
 			path = "FIT5140-Maybe the last Version";
+			sourceTree = "<group>";
+		};
+		60DC1C89231D514800B12F1C /* Data Model */ = {
+			isa = PBXGroup;
+			children = (
+				60DC1C8A231D516A00B12F1C /*  LocationData.xcdatamodeld */,
+				60DC1C8D231D612400B12F1C /* CoreDataController.swift */,
+			);
+			path = "Data Model";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -240,7 +254,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				60DC1C86231D325100B12F1C /* NewLocationViewController.swift in Sources */,
+				60DC1C8C231D516A00B12F1C /*  LocationData.xcdatamodeld in Sources */,
 				60DC1C58231D313100B12F1C /* ViewController.swift in Sources */,
+				60DC1C8E231D612400B12F1C /* CoreDataController.swift in Sources */,
 				60DC1C56231D313100B12F1C /* AppDelegate.swift in Sources */,
 				60DC1C84231D323500B12F1C /* LocationTableViewController.swift in Sources */,
 				60DC1C88231D327100B12F1C /* LocationAnnotation.swift in Sources */,
@@ -570,6 +586,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		60DC1C8A231D516A00B12F1C /*  LocationData.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				60DC1C8B231D516A00B12F1C /*  LocationData.xcdatamodel */,
+			);
+			currentVersion = 60DC1C8B231D516A00B12F1C /*  LocationData.xcdatamodel */;
+			path = " LocationData.xcdatamodeld";
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 60DC1C4A231D313100B12F1C /* Project object */;
 }
