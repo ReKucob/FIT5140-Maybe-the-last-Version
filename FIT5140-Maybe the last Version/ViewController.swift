@@ -7,12 +7,34 @@
 //
 
 import UIKit
+import MapKit
 
 class ViewController: UIViewController {
 
+ 
+    @IBOutlet weak var mapView: MKMapView!
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+
+        centerMapLocation(location: initialLocation)
+    }
+    
+    let initialLocation = CLLocation(latitude: -37.8124, longitude: 144.9623)
+    
+    //set the distance for the view
+    let regionRadius:CLLocationDistance = 1000
+    
+    //This function is used to set the initial map view when use open the app.
+    func centerMapLocation(location:CLLocation){
+        let coordinateRegion = MKCoordinateRegion(center: location.coordinate,latitudinalMeters: regionRadius, longitudinalMeters: regionRadius)
+        mapView.setRegion(coordinateRegion, animated: true)
+    }
+    
+    func focusOn(annotation: MKAnnotation){
+        mapView.selectAnnotation(annotation, animated: true)
+        let newCenter = MKCoordinateRegion(center: annotation.coordinate,latitudinalMeters: regionRadius, longitudinalMeters: regionRadius)
+        mapView.setRegion(newCenter, animated: true)
     }
 
 

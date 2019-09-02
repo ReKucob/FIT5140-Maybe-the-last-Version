@@ -12,6 +12,9 @@
 		60DC1C5B231D313100B12F1C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 60DC1C59231D313100B12F1C /* Main.storyboard */; };
 		60DC1C5D231D313300B12F1C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 60DC1C5C231D313300B12F1C /* Assets.xcassets */; };
 		60DC1C60231D313300B12F1C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 60DC1C5E231D313300B12F1C /* LaunchScreen.storyboard */; };
+		60DC1C84231D323500B12F1C /* LocationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DC1C83231D323500B12F1C /* LocationTableViewController.swift */; };
+		60DC1C86231D325100B12F1C /* NewLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DC1C85231D325100B12F1C /* NewLocationViewController.swift */; };
+		60DC1C88231D327100B12F1C /* LocationAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DC1C87231D327100B12F1C /* LocationAnnotation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,6 +44,9 @@
 		60DC1C61231D313300B12F1C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		60DC1C66231D313300B12F1C /* FIT5140-Maybe the last VersionTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "FIT5140-Maybe the last VersionTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		60DC1C71231D313300B12F1C /* FIT5140-Maybe the last VersionUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "FIT5140-Maybe the last VersionUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		60DC1C83231D323500B12F1C /* LocationTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationTableViewController.swift; sourceTree = "<group>"; };
+		60DC1C85231D325100B12F1C /* NewLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewLocationViewController.swift; sourceTree = "<group>"; };
+		60DC1C87231D327100B12F1C /* LocationAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationAnnotation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +101,9 @@
 				60DC1C5C231D313300B12F1C /* Assets.xcassets */,
 				60DC1C5E231D313300B12F1C /* LaunchScreen.storyboard */,
 				60DC1C61231D313300B12F1C /* Info.plist */,
+				60DC1C83231D323500B12F1C /* LocationTableViewController.swift */,
+				60DC1C85231D325100B12F1C /* NewLocationViewController.swift */,
+				60DC1C87231D327100B12F1C /* LocationAnnotation.swift */,
 			);
 			path = "FIT5140-Maybe the last Version";
 			sourceTree = "<group>";
@@ -230,8 +239,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				60DC1C86231D325100B12F1C /* NewLocationViewController.swift in Sources */,
 				60DC1C58231D313100B12F1C /* ViewController.swift in Sources */,
 				60DC1C56231D313100B12F1C /* AppDelegate.swift in Sources */,
+				60DC1C84231D323500B12F1C /* LocationTableViewController.swift in Sources */,
+				60DC1C88231D327100B12F1C /* LocationAnnotation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
