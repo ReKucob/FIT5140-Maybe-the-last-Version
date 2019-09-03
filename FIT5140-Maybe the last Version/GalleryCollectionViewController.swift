@@ -7,14 +7,26 @@
 //
 
 import UIKit
+import CoreData
 
 private let reuseIdentifier = "Cell"
 
-class GalleryCollectionViewController: UICollectionViewController {
+class GalleryCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+    
+    private let reuseIdentifier = "imageCell"
+    private let sectionInsets = UIEdgeInsets(top: 50.0, left: 20.0, bottom: 50.0, right: 20.0)
+    private let itemsPerRow: CGFloat = 3
+    
+    var imageList = [UIImage]()
+    var imagePathList = [String]()
+    var managedObjectContext: NSManagedObjectContext?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        let appDelegate = UIApplication.shared.delegate as? AppDelegate
+        managedObjectContext = appDelegate?.persistantContainer?.viewContext
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -24,6 +36,49 @@ class GalleryCollectionViewController: UICollectionViewController {
         // Do any additional setup after loading the view.
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        do{
+            let imageDataList = try managedObjectContext!.fetch(ImageMetaData.fetchRequest()) as [ImageMetaData]
+            
+            if (imageDataList.count > 0){
+                for data in imageDataList{
+                    let filename = data.filename!
+                    
+                    if(imagePathList.contains(filename)){
+                        print("Image already loaded in. skipping image")
+                        continue
+                    }
+                    
+                    if let image = loadImageData(filename: filename){
+                        self.imageList.append(image)
+                        self.imagePathList.append(filename)
+                        self.collectionView!.reloadSections([0])
+                    }
+                }
+            
+            }
+        }
+        catch{
+            print("Unable to fetch list of parties")
+        }
+    }
+    
+    func loadImageData(filename: String) -> UIImage?{
+        let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask,true)[0] as String
+        
+        let url = NSURL(fileURLWithPath: path)
+        var image: UIImage?
+        if let pathComponent = url.appendingPathComponent(filename){
+            let filePath = pathComponent.path
+            let fileManeger = FileManager.default
+            let fileData = FileManager.contents(atPath: filePath)
+            image = UIImage(data: fileData!)
+        }
+        
+        return image
+    }
     /*
     // MARK: - Navigation
 
@@ -38,18 +93,21 @@ class GalleryCollectionViewController: UICollectionViewController {
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        return 0
+        return imageList.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
-    
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! ImageCollectionViewCell
+        
+        cell.backgroundColor = UIColor.lightGray
+        cell.imageView.image = imageList[indexPath.row]
         // Configure the cell
     
         return cell
@@ -57,12 +115,23 @@ class GalleryCollectionViewController: UICollectionViewController {
 
     // MARK: UICollectionViewDelegate
 
-    /*
-    // Uncomment this method to specify if the specified item should be highlighted during tracking
-    override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-        return true
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize{
+        let paddingSpace = sectionInsets.left * (itemsPerRow + 1)
+        let availableWidth = view.frame.width - paddingSpace
+        let widthPerItem = availableWidth / itemsPerRow
+        return CGSize(width: widthPerItem, height: widthPerItem)
     }
-    */
+    
+    func collectionView(_ collectionView: UICollectionViewLayout, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets{
+        return sectionInsets
+    }
+    
+    func collectionView(_ collectionView: UICollectionViewLayout, layout collectionViewLayout: UICollectionViewLayout, minimunLineSpacingForSectionAt section: Int) -> CGFloat
+    {
+        return sectionInsets.left
+    }
+    
+    
 
     /*
     // Uncomment this method to specify if the specified item should be selected

@@ -259,7 +259,7 @@
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ImageCell" id="xGg-Ab-Grp">
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ImageCell" id="xGg-Ab-Grp" customClass="ImageCollectionViewCell" customModule="FIT5140_Maybe_the_last_Version" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -277,6 +277,9 @@
                                     <constraint firstAttribute="bottom" secondItem="hPf-zr-2Rx" secondAttribute="bottom" constant="8" id="vQX-IS-Nmm"/>
                                     <constraint firstAttribute="trailing" secondItem="hPf-zr-2Rx" secondAttribute="trailing" constant="8" id="ypr-yE-hJb"/>
                                 </constraints>
+                                <connections>
+                                    <outlet property="imageView" destination="hPf-zr-2Rx" id="ALE-Lb-ons"/>
+                                </connections>
                             </collectionViewCell>
                         </cells>
                         <connections>
@@ -329,6 +332,11 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="gS5-pJ-HTz"/>
                     </view>
+                    <connections>
+                        <outlet property="imageView" destination="oYL-fJ-CaE" id="Brp-6b-xM8"/>
+                        <outlet property="savePhoto" destination="176-Bc-zBj" id="rzQ-Xa-6UL"/>
+                        <outlet property="takePhoto" destination="fem-V1-cqs" id="GE6-1v-6o2"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ukm-I6-N9K" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -10,6 +10,9 @@ import UIKit
 
 class CameraViewController: UIViewController {
 
+    @IBOutlet weak var savePhoto: UIButton!
+    @IBOutlet weak var takePhoto: UIButton!
+    @IBOutlet weak var imageView: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
 
