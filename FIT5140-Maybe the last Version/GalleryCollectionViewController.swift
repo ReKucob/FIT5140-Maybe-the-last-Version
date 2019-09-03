@@ -59,6 +59,8 @@ class GalleryCollectionViewController: UICollectionViewController, UICollectionV
                 }
             
             }
+            
+        
         }
         catch{
             print("Unable to fetch list of parties")
@@ -72,8 +74,8 @@ class GalleryCollectionViewController: UICollectionViewController, UICollectionV
         var image: UIImage?
         if let pathComponent = url.appendingPathComponent(filename){
             let filePath = pathComponent.path
-            let fileManeger = FileManager.default
-            let fileData = FileManager.contents(atPath: filePath)
+            let fileManager = FileManager.default
+            let fileData = fileManager.contents(atPath: filePath)
             image = UIImage(data: fileData!)
         }
         
