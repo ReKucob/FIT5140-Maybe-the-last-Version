@@ -19,7 +19,6 @@ class LocationTableViewController: UITableViewController, NewLocationDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
 
         
     }
@@ -106,6 +105,9 @@ class LocationTableViewController: UITableViewController, NewLocationDelegate {
      
      }
      */
+    
+    
+    @IBOutlet weak var searchField: UISearchBar!
     
     
 }

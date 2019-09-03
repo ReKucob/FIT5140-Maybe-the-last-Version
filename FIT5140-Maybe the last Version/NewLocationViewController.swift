@@ -31,6 +31,7 @@ class NewLocationViewController: UIViewController, CLLocationManagerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
         locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
         locationManager.distanceFilter = 10
         locationManager.delegate = self
@@ -79,12 +80,13 @@ class NewLocationViewController: UIViewController, CLLocationManagerDelegate {
         }
         else
         {
-            self.save(locationName: titleTextView.text!, locationDescription: descriptionTextField.text!, latitude: Double(latitudeTextView.text!)!, Longitude: Double(longitudeTextView.text!)!)
-            navigationController?.popViewController(animated: true)
-            
-            /*let location = LocationAnnotation(newTitle: titleTextView.text!, newSubtitle: descriptionTextField.text!, lat: Double(latitudeTextView.text!)!, long: Double(longitudeTextView.text!)!)
-            delegate?.locationAnnotationAdded(annotation: location)
+            /*self.save(locationName: titleTextView.text!, locationDescription: descriptionTextField.text!, latitude: Double(latitudeTextView.text!)!, Longitude: Double(longitudeTextView.text!)!)
             */
+            
+            let location = LocationAnnotation(newTitle: titleTextView.text!, newSubtitle: descriptionTextField.text!, lat: Double(latitudeTextView.text!)!, long: Double(longitudeTextView.text!)!)
+            delegate?.locationAnnotationAdded(annotation: location)
+             navigationController?.popViewController(animated: true)
+            
             
  
         }
@@ -102,7 +104,7 @@ class NewLocationViewController: UIViewController, CLLocationManagerDelegate {
         
     }
     
-    func save(locationName: String, locationDescription: String, latitude: Double, Longitude: Double)
+    /*func save(locationName: String, locationDescription: String, latitude: Double, Longitude: Double)
     {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
             return
@@ -129,5 +131,6 @@ class NewLocationViewController: UIViewController, CLLocationManagerDelegate {
         }
         
     }
+ */
 }
 

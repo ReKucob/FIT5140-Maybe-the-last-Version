@@ -1,5 +1,5 @@
 //
-//  CoreDataController.swift
+//  ImageCollectionViewCell.swift
 //  FIT5140-Maybe the last Version
 //
 //  Created by Burns on 3/9/19.
@@ -7,11 +7,8 @@
 //
 
 import UIKit
-import CoreData
 
-class CoreDataController: NSObject {
+class ImageCollectionViewCell: UICollectionViewCell {
     
-    var historicalLocation: [NSManagedObject] = []
     
-
 }

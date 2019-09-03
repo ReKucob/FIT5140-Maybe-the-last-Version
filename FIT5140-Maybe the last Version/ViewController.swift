@@ -20,7 +20,7 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
 
         centerMapLocation(location: initialLocation)
-        
+        mapView.delegate = self
 
         //Location 1
         var location = LocationAnnotation(newTitle: "Melbourne Museum", newSubtitle: "A natural and cultural history museum located in the Carlton Gardens in Melbourne", lat: -37.8033, long: 144.9717)
@@ -126,5 +126,29 @@ class ViewController: UIViewController {
    
     
 
+}
+
+extension ViewController: MKMapViewDelegate {
+    // 1
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        // 2
+        guard let annotation = annotation as? LocationTableViewController else { return nil }
+        // 3
+        let identifier = "marker"
+        var view: MKMarkerAnnotationView
+        // 4
+        if let dequeuedView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
+            as? MKMarkerAnnotationView {
+            dequeuedView.annotation = (annotation as! MKAnnotation)
+            view = dequeuedView
+        } else {
+            // 5
+            view = MKMarkerAnnotationView(annotation: (annotation as! MKAnnotation), reuseIdentifier: identifier)
+            view.canShowCallout = true
+            view.calloutOffset = CGPoint(x: -5, y: 5)
+            view.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+        }
+        return view
+    }
 }
 

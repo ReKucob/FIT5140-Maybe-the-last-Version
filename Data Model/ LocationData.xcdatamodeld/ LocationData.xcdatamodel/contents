@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14492.1" systemVersion="18G87" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="ImageMetaData" representedClassName="ImageMetaData" syncable="YES">
+        <attribute name="filename" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="imageoflocation" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="LocationsMetaData" inverseName="locationImage" inverseEntity="LocationsMetaData" syncable="YES"/>
+    </entity>
     <entity name="LocationsMetaData" representedClassName="LocationsMetaData" syncable="YES">
         <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="locationDescription" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="locationName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="locationImage" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ImageMetaData" inverseName="imageoflocation" inverseEntity="ImageMetaData" syncable="YES"/>
     </entity>
     <elements>
-        <element name="LocationsMetaData" positionX="-63" positionY="-18" width="128" height="105"/>
+        <element name="LocationsMetaData" positionX="-63" positionY="-18" width="128" height="120"/>
+        <element name="ImageMetaData" positionX="154.83984375" positionY="159.1953125" width="128" height="75"/>
     </elements>
 </model>
