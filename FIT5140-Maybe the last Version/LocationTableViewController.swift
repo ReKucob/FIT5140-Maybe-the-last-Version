@@ -10,30 +10,40 @@ import UIKit
 import MapKit
 import CoreData
 
-class LocationTableViewController: UITableViewController, NewLocationDelegate {
-
-    var viewController: ViewController?
-    var locationList: [LocationAnnotation] = []
+class LocationTableViewController: UITableViewController, DatabaseListener{
     
-    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    
+    var locationList: [LocationInfo] = []
+    weak var databaseController: DatabaseProtocol?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //self.navigationItem.rightBarButtonItem = self.editButtonItem
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        databaseController = appDelegate.databaseController
         
-        locationList = appDelegate.defaultList
+        
         
     }
     
-    
-    //add the annotation into map
-    func locationAnnotationAdded(annotation: LocationAnnotation)
-    {
-        locationList.append(annotation)
-        viewController?.mapView.addAnnotation(annotation)
-        tableView.insertRows(at: [IndexPath(row:locationList.count - 1, section: 0)], with: .automatic)
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        databaseController?.addListener(listener: self)
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        databaseController?.removeListener(listener: self)
+    }
+    
+    var listenerType = ListenerType.locationinfo
+    
+    func onMapModelChange(change: DatabaseChange, historicals: [LocationInfo]) {
+        locationList = historicals
+        
+    }
+    
 
     // MARK: - Table view data source
 
@@ -50,19 +60,14 @@ class LocationTableViewController: UITableViewController, NewLocationDelegate {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "locationCell", for: indexPath)
-        let annotation = self.locationList[indexPath.row]
+        let coreLocations = locationList[indexPath.row]
         
         //set text into the table cell
-        cell.textLabel?.text = annotation.title
-        cell.detailTextLabel?.text = annotation.subtitle
+        cell.textLabel?.text = coreLocations.name
+        cell.detailTextLabel?.text = coreLocations.introduction
         return cell
     }
-    
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        viewController?.focusOn(annotation:self.locationList[indexPath.row])
-        // Return false if you do not want the specified item to be editable
-    }
+
     
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -79,27 +84,12 @@ class LocationTableViewController: UITableViewController, NewLocationDelegate {
 
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            locationList.remove(at: indexPath.row)
+        if editingStyle == .delete{
+            databaseController?.deleteLocationInfo(locationInfo: locationList[indexPath.row])
             tableView.deleteRows(at: [indexPath], with: .fade)
+            
         }
     }
-    
-    
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "addLocationSegue"{
-            let controller = segue.destination as! NewLocationViewController
-            controller.delegate = self
-        }
-        
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    
-
     
     /*
      // Override to support rearranging the table view.

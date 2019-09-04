@@ -27,9 +27,13 @@ class NewLocationViewController: UIViewController, CLLocationManagerDelegate {
     var locationManager: CLLocationManager = CLLocationManager()
     var currentLocation: CLLocationCoordinate2D?
     
+    weak var databaseController: DatabaseProtocol?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        databaseController = appDelegate.databaseController
         
         
         locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
@@ -83,10 +87,8 @@ class NewLocationViewController: UIViewController, CLLocationManagerDelegate {
             /*self.save(locationName: titleTextView.text!, locationDescription: descriptionTextField.text!, latitude: Double(latitudeTextView.text!)!, Longitude: Double(longitudeTextView.text!)!)
             */
             
-            let location = LocationAnnotation(newTitle: titleTextView.text!, newSubtitle: descriptionTextField.text!, lat: Double(latitudeTextView.text!)!, long: Double(longitudeTextView.text!)!)
-            delegate?.locationAnnotationAdded(annotation: location)
-             navigationController?.popViewController(animated: true)
-            
+           let _ = databaseController!.addLocationInfo(name: titleTextView.text!, introduction: descriptionTextField.text!, latitude: Double(latitudeTextView.text!)!, longitude: Double(longitudeTextView.text!)!, iconName: "pending", photoName: "pending")
+            navigationController?.popViewController(animated: true)
             
  
         }

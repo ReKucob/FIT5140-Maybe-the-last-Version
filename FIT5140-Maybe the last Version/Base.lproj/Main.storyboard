@@ -48,7 +48,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="mapView" destination="PFd-ml-yex" id="hGD-uP-EEU"/>
+                        <outlet property="mapView" destination="PFd-ml-yex" id="GQy-Qe-83y"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -398,8 +398,6 @@
                     </view>
                     <connections>
                         <outlet property="imageView" destination="oYL-fJ-CaE" id="Brp-6b-xM8"/>
-                        <outlet property="savePhoto" destination="176-Bc-zBj" id="rzQ-Xa-6UL"/>
-                        <outlet property="takePhoto" destination="fem-V1-cqs" id="GE6-1v-6o2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ukm-I6-N9K" userLabel="First Responder" sceneMemberID="firstResponder"/>

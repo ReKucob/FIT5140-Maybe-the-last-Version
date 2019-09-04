@@ -2,7 +2,7 @@
 //  DatabaseProtocol.swift
 //  FIT5140-Maybe the last Version
 //
-//  Created by Burns on 3/9/19.
+//  Created by Burns on 4/9/19.
 //  Copyright © 2019 Burns. All rights reserved.
 //
 
@@ -15,31 +15,21 @@ enum DatabaseChange{
 }
 
 enum ListenerType{
-    case image
-    case locations
+    case locationinfo
     case all
 }
 
-protocol DatabaseListener: AnyObject{
+protocol DatabaseListener: AnyObject {
     var listenerType: ListenerType{get set}
-    func onImageChange(change: DatabaseChange, imageoflocation: [LocationsMetaData])
-    func onLocationChange(change: DatabaseChange, locationImage: [ImageMetaData])
+    func onMapModelChange(change: DatabaseChange, historicals: [LocationInfo])
 }
 
-protocol DatabaseProtocol: AnyObject {
-    var defaultLocation: LocationsMetaData{get}
+protocol DatabaseProtocol: AnyObject{
+   
     
-    func addLocation(locationName: String, locationDescription: String, latitude: Double, longitude: Double) -> LocationsMetaData
-    
-    func addImage(filename: String) -> ImageMetaData
-    
-    func addImageToLocation(location: LocationsMetaData, image: ImageMetaData) -> Bool
-    
-    func deleteLocation(location: LocationsMetaData)
-    func deleteImage(image: ImageMetaData)
-    
-    func removeImageFromLocation(location: LocationsMetaData, image: ImageMetaData)
-    
+    func addLocationInfo(name: String,introduction: String,latitude: Double,longitude: Double,iconName: String,photoName: String)
+    func deleteLocationInfo(locationInfo: LocationInfo)
     func addListener(listener: DatabaseListener)
     func removeListener(listener: DatabaseListener)
+
 }

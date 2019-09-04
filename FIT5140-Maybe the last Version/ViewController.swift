@@ -9,27 +9,42 @@
 import UIKit
 import MapKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, DatabaseListener {
 
-    var locationList: [LocationAnnotation] = []
+    var locationList: [LocationInfo] = []
+    weak var databaseController: DatabaseProtocol?
     
-    let appDelegate = UIApplication.shared.delegate as! AppDelegate
-    
-    var locationTableView: LocationTableViewController?
     
     @IBOutlet weak var mapView: MKMapView!
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
 
-        centerMapLocation(location: initialLocation)
-        locationList = appDelegate.defaultList
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        databaseController = appDelegate.databaseController
         
-        for location in locationList{
-            mapView.addAnnotation(location)
-        }
+        centerMapLocation(location: initialLocation)
+        
         
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        databaseController?.addListener(listener: self)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        databaseController?.removeListener(listener: self)
+    }
+    
+    var listenerType = ListenerType.locationinfo
+    
+    func onMapModelChange(change: DatabaseChange, historicals: [LocationInfo]) {
+        locationList = historicals
+    }
+
+    
     
     let initialLocation = CLLocation(latitude: -37.8124, longitude: 144.9623)
     
@@ -51,29 +66,5 @@ class ViewController: UIViewController {
    
     
 
-}
-
-extension ViewController: MKMapViewDelegate {
-    // 1
-    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        // 2
-        guard let annotation = annotation as? LocationTableViewController else { return nil }
-        // 3
-        let identifier = "marker"
-        var view: MKMarkerAnnotationView
-        // 4
-        if let dequeuedView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
-            as? MKMarkerAnnotationView {
-            dequeuedView.annotation = (annotation as! MKAnnotation)
-            view = dequeuedView
-        } else {
-            // 5
-            view = MKMarkerAnnotationView(annotation: (annotation as! MKAnnotation), reuseIdentifier: identifier)
-            view.canShowCallout = true
-            view.calloutOffset = CGPoint(x: -5, y: 5)
-            view.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
-        }
-        return view
-    }
 }
 
