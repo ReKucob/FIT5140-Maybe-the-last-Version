@@ -14,14 +14,33 @@ protocol NewLocationDelegate{
     func locationAnnotationAdded(annotation: LocationAnnotation)
 }
 
-class NewLocationViewController: UIViewController, CLLocationManagerDelegate {
+class NewLocationViewController: UIViewController, CLLocationManagerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate, DatabaseListener {
+   
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        databaseController?.addListener(listener: self)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        databaseController?.removeListener(listener: self)
+    }
+    
+    var listenerType = ListenerType.locationinfo
+    
+    func onMapModelChange(change: DatabaseChange, historicals: [LocationInfo]) {
+    }
     
     var historicalLocation: [NSManagedObject] = []
+    var managedObjectContext: NSManagedObjectContext?
     
     @IBOutlet weak var titleTextView: UITextField!
     @IBOutlet weak var descriptionTextField: UITextField!
     @IBOutlet weak var latitudeTextView: UITextField!
     @IBOutlet weak var longitudeTextView: UITextField!
+    @IBOutlet weak var iconSegmented: UISegmentedControl!
+    @IBOutlet weak var imageViewField: UIImageView!
+    
     
     var delegate: NewLocationDelegate?
     var locationManager: CLLocationManager = CLLocationManager()
@@ -34,7 +53,7 @@ class NewLocationViewController: UIViewController, CLLocationManagerDelegate {
         
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         databaseController = appDelegate.databaseController
-        
+        managedObjectContext = appDelegate.persistantContainer?.viewContext
         
         locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
         locationManager.distanceFilter = 10
@@ -42,16 +61,6 @@ class NewLocationViewController: UIViewController, CLLocationManagerDelegate {
         locationManager.requestAlwaysAuthorization()
         
         // Do any additional setup after loading the view.
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        locationManager.startUpdatingLocation()
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        locationManager.stopUpdatingLocation()
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations:[CLLocation])
@@ -87,24 +96,93 @@ class NewLocationViewController: UIViewController, CLLocationManagerDelegate {
             /*self.save(locationName: titleTextView.text!, locationDescription: descriptionTextField.text!, latitude: Double(latitudeTextView.text!)!, Longitude: Double(longitudeTextView.text!)!)
             */
             
-           let _ = databaseController!.addLocationInfo(name: titleTextView.text!, introduction: descriptionTextField.text!, latitude: Double(latitudeTextView.text!)!, longitude: Double(longitudeTextView.text!)!, iconName: "pending", photoName: "pending")
-            navigationController?.popViewController(animated: true)
+            guard let image = imageViewField.image
             
+            else{
+                displayMessage("Cannot save until a photo has been taken!", "Error")
+                return
+            }
+            
+            let date = UInt(Date().timeIntervalSince1970)
+            var data = Data()
+            data = image.jpegData(compressionQuality: 0.8)!
+            
+            let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
+            let url = NSURL(fileURLWithPath: path)
+            
+            if let pathComponent = url.appendingPathComponent("\(date)"){
+                let filePath = pathComponent.path
+                let fileManager = FileManager.default
+                fileManager.createFile(atPath: filePath, contents: data, attributes: nil)
+            }
+            
+            let newImage = NSEntityDescription.insertNewObject(forEntityName: "LocationInfo", into: managedObjectContext!) as! LocationInfo
+            newImage.photoName = "\(date)"
+            
+            let _ = databaseController!.addLocationInfo(name: titleTextView.text!, introduction: descriptionTextField.text!, latitude: Double(latitudeTextView.text!)!, longitude: Double(longitudeTextView.text!)!, iconName: segmentImageNameShift(currentSegement: iconSegmented.selectedSegmentIndex), photoName: "\(date)")
+            navigationController?.popViewController(animated: true)
  
         }
+    }
+    
+    func segmentImageNameShift(currentSegement: Int) -> String{
+        let segmentSelected = currentSegement
         
+        switch segmentSelected {
+        case 0:
+            return "Archiecture"
+        case 1:
+            return "Cabin"
+        case 2:
+            return "Church"
+        case 3:
+            return "Museum"
+        case 4:
+            return "Shrine"
+        case 5:
+            return "Station"
+        default:
+            return "Archiecture"
+        }
+    }
+    
+    @IBAction func takePhoto(_ sender: Any) {
+        let controller = UIImagePickerController()
+        if UIImagePickerController.isSourceTypeAvailable(.camera){
+            controller.sourceType = .camera
+        }
+        else
+        {
+            controller.sourceType = .photoLibrary
+        }
         
-        /*
-         // MARK: - Navigation
-         
-         // In a storyboard-based application, you will often want to do a little preparation before navigation
-         override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-         // Get the new view controller using segue.destination.
-         // Pass the selected object to the new view controller.
-         }
-         */
+        controller.allowsEditing = false
+        controller.delegate = self
+        self.present(controller, animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]){
+        if let pickedImage = info[.originalImage] as? UIImage{
+            imageViewField.image = pickedImage
+        }
+        dismiss(animated: true, completion: nil)
         
     }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController){
+        displayMessage("There was an error in getting the image", "Error")
+        
+    }
+    
+    
+    func displayMessage(_ message: String, _ title: String){
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
+        self.present(alertController, animated: true, completion: nil)
+        
+    }
+    
+    
     
     /*func save(locationName: String, locationDescription: String, latitude: Double, Longitude: Double)
     {

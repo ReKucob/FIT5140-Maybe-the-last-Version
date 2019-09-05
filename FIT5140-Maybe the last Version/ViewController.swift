@@ -25,12 +25,19 @@ class ViewController: UIViewController, DatabaseListener {
         
         centerMapLocation(location: initialLocation)
         
+        mapView.delegate = self
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         databaseController?.addListener(listener: self)
+        
+        for location in locationList{
+            let sight = LocationAnnotation(newTitle: location.name!, newSubtitle: location.introduction!, lat: location.latitude, long: location.longitude, icon: location.iconName!, image: location.photoName!)
+            mapView.addAnnotation(sight)
+        }
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -43,8 +50,6 @@ class ViewController: UIViewController, DatabaseListener {
     func onMapModelChange(change: DatabaseChange, historicals: [LocationInfo]) {
         locationList = historicals
     }
-
-    
     
     let initialLocation = CLLocation(latitude: -37.8124, longitude: 144.9623)
     
@@ -62,9 +67,37 @@ class ViewController: UIViewController, DatabaseListener {
         let newCenter = MKCoordinateRegion(center: annotation.coordinate,latitudinalMeters: regionRadius, longitudinalMeters: regionRadius)
         mapView.setRegion(newCenter, animated: true)
     }
+}
+extension ViewController: MKMapViewDelegate {
+    // 1
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        // 2
+        guard let annotation = annotation as? LocationAnnotation else { return nil }
+        // 3
+        let identifier = "marker"
+        var view: MKMarkerAnnotationView
+        // 4
+        if let dequeuedView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
+            as? MKMarkerAnnotationView {
+            dequeuedView.annotation = annotation
+            view = dequeuedView
+        } else {
+            // 5
+            view = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+            view.canShowCallout = true
+            view.calloutOffset = CGPoint(x: -5, y: 5)
+            let mapsButton = UIButton(frame: CGRect(origin: CGPoint.zero,
+                                                         size: CGSize(width: 30, height: 30)))
+            mapsButton.setBackgroundImage(UIImage(named: "Architecture"), for: UIControl.State())
+            view.rightCalloutAccessoryView = mapsButton
+        }
+        return view
+    }
+}
+    
 
    
     
 
-}
+
 

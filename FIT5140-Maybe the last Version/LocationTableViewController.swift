@@ -12,9 +12,13 @@ import CoreData
 
 class LocationTableViewController: UITableViewController, DatabaseListener{
     
-    
+
     var locationList: [LocationInfo] = []
+    var filterLocations: [LocationInfo] = []
+    var viewController: ViewController?
     weak var databaseController: DatabaseProtocol?
+    
+    let searchController = UISearchController(searchResultsController: nil)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,10 +26,13 @@ class LocationTableViewController: UITableViewController, DatabaseListener{
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         databaseController = appDelegate.databaseController
         
-        
-        
+        // Setup the Search Controller
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search Locations"
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
     }
-    
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -41,10 +48,8 @@ class LocationTableViewController: UITableViewController, DatabaseListener{
     
     func onMapModelChange(change: DatabaseChange, historicals: [LocationInfo]) {
         locationList = historicals
-        
     }
     
-
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -53,18 +58,24 @@ class LocationTableViewController: UITableViewController, DatabaseListener{
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
+        if isFiltering() {
+            return filterLocations.count
+        }
+        
         return locationList.count
+        // #warning Incomplete implementation, return the number of rows
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "locationCell", for: indexPath)
-        let coreLocations = locationList[indexPath.row]
-        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "locationCell", for: indexPath) as! LocationTableViewCell
+        if isFiltering(){
+           locationList[indexPath.row] = filterLocations[indexPath.row]
+        }
         //set text into the table cell
-        cell.textLabel?.text = coreLocations.name
-        cell.detailTextLabel?.text = coreLocations.introduction
+        cell.titleLabel?.text = locationList[indexPath.row].name
+        cell.subtitleLabel?.text = locationList[indexPath.row].introduction
+        cell.imageLabel?.image = UIImage(named: locationList[indexPath.row].iconName!)
         return cell
     }
 
@@ -81,27 +92,49 @@ class LocationTableViewController: UITableViewController, DatabaseListener{
         return true
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.tableView!.deselectRow(at: indexPath, animated: true)
+        let sight = self.locationList[indexPath.row]
+        self.performSegue(withIdentifier: "showDetailSegue", sender: sight)
+    }
+    
 
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete{
             databaseController?.deleteLocationInfo(locationInfo: locationList[indexPath.row])
             tableView.deleteRows(at: [indexPath], with: .fade)
-            
         }
     }
     
-    /*
-     // Override to support rearranging the table view.
-     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-     
-     }
-     */
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
+    {
+        if segue.identifier == "showDetailSegue" {
+        let controller = segue.destination as! DetailsViewController
+        controller.locationDetails = sender as? LocationInfo
+        }
+    }
     
+    func searchBarIsEmpty() -> Bool {
+        // Returns true if the text is empty or nil
+        return searchController.searchBar.text?.isEmpty ?? true
+    }
     
-    @IBOutlet weak var searchField: UISearchBar!
+    func filterContentForSearchText(_ searchText: String, scope: String = "All") {
+        filterLocations = locationList.filter({( location : LocationInfo) -> Bool in
+            return (location.name?.lowercased().contains(searchText.lowercased()))!
+        })
+        tableView.reloadData()
+    }
     
-    
+    func isFiltering() -> Bool {
+        return searchController.isActive && !searchBarIsEmpty()
+    }
 }
-
+extension LocationTableViewController: UISearchResultsUpdating {
+    // MARK: - UISearchResultsUpdating Delegate
+    func updateSearchResults(for searchController: UISearchController) {
+    filterContentForSearchText(searchController.searchBar.text!)
+    }
+}
 

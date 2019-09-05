@@ -13,9 +13,7 @@
 		60640E27231FC3AF0039A69F /* DatabaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60640E26231FC3AF0039A69F /* DatabaseProtocol.swift */; };
 		60640E29231FC7700039A69F /* CoreDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60640E28231FC7700039A69F /* CoreDataController.swift */; };
 		60640E2B231FEBE40039A69F /* MulticastDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60640E2A231FEBE40039A69F /* MulticastDelegate.swift */; };
-		60A4B83B231DF130001FB33D /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A4B83A231DF130001FB33D /* ImageCollectionViewCell.swift */; };
 		60A4B83F231DF166001FB33D /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A4B83E231DF166001FB33D /* CameraViewController.swift */; };
-		60A4B841231DF46C001FB33D /* GalleryCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A4B840231DF46C001FB33D /* GalleryCollectionViewController.swift */; };
 		60A4B850231EC42D001FB33D /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A4B84F231EC42D001FB33D /* DetailsViewController.swift */; };
 		60DC1C56231D313100B12F1C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DC1C55231D313100B12F1C /* AppDelegate.swift */; };
 		60DC1C58231D313100B12F1C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DC1C57231D313100B12F1C /* ViewController.swift */; };
@@ -25,6 +23,7 @@
 		60DC1C84231D323500B12F1C /* LocationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DC1C83231D323500B12F1C /* LocationTableViewController.swift */; };
 		60DC1C86231D325100B12F1C /* NewLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DC1C85231D325100B12F1C /* NewLocationViewController.swift */; };
 		60DC1C88231D327100B12F1C /* LocationAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DC1C87231D327100B12F1C /* LocationAnnotation.swift */; };
+		60ECA6F02320E922008B1CBD /* LocationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60ECA6EF2320E922008B1CBD /* LocationTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,9 +50,7 @@
 		60640E26231FC3AF0039A69F /* DatabaseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseProtocol.swift; sourceTree = "<group>"; };
 		60640E28231FC7700039A69F /* CoreDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataController.swift; sourceTree = "<group>"; };
 		60640E2A231FEBE40039A69F /* MulticastDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MulticastDelegate.swift; sourceTree = "<group>"; };
-		60A4B83A231DF130001FB33D /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		60A4B83E231DF166001FB33D /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
-		60A4B840231DF46C001FB33D /* GalleryCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryCollectionViewController.swift; sourceTree = "<group>"; };
 		60A4B84F231EC42D001FB33D /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
 		60DC1C52231D313100B12F1C /* FIT5140-Maybe the last Version.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "FIT5140-Maybe the last Version.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		60DC1C55231D313100B12F1C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -67,6 +64,7 @@
 		60DC1C83231D323500B12F1C /* LocationTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationTableViewController.swift; sourceTree = "<group>"; };
 		60DC1C85231D325100B12F1C /* NewLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewLocationViewController.swift; sourceTree = "<group>"; };
 		60DC1C87231D327100B12F1C /* LocationAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationAnnotation.swift; sourceTree = "<group>"; };
+		60ECA6EF2320E922008B1CBD /* LocationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,9 +135,8 @@
 				60DC1C83231D323500B12F1C /* LocationTableViewController.swift */,
 				60DC1C85231D325100B12F1C /* NewLocationViewController.swift */,
 				60DC1C87231D327100B12F1C /* LocationAnnotation.swift */,
-				60A4B83A231DF130001FB33D /* ImageCollectionViewCell.swift */,
 				60A4B83E231DF166001FB33D /* CameraViewController.swift */,
-				60A4B840231DF46C001FB33D /* GalleryCollectionViewController.swift */,
+				60ECA6EF2320E922008B1CBD /* LocationTableViewCell.swift */,
 			);
 			path = "FIT5140-Maybe the last Version";
 			sourceTree = "<group>";
@@ -286,7 +283,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				60640E27231FC3AF0039A69F /* DatabaseProtocol.swift in Sources */,
-				60A4B83B231DF130001FB33D /* ImageCollectionViewCell.swift in Sources */,
+				60ECA6F02320E922008B1CBD /* LocationTableViewCell.swift in Sources */,
 				60640E2B231FEBE40039A69F /* MulticastDelegate.swift in Sources */,
 				60DC1C86231D325100B12F1C /* NewLocationViewController.swift in Sources */,
 				60640E24231FC2FE0039A69F /* LocationInfo+CoreDataClass.swift in Sources */,
@@ -294,7 +291,6 @@
 				60DC1C58231D313100B12F1C /* ViewController.swift in Sources */,
 				60DC1C56231D313100B12F1C /* AppDelegate.swift in Sources */,
 				60A4B850231EC42D001FB33D /* DetailsViewController.swift in Sources */,
-				60A4B841231DF46C001FB33D /* GalleryCollectionViewController.swift in Sources */,
 				60640E25231FC2FE0039A69F /* LocationInfo+CoreDataProperties.swift in Sources */,
 				60640E29231FC7700039A69F /* CoreDataController.swift in Sources */,
 				60DC1C84231D323500B12F1C /* LocationTableViewController.swift in Sources */,
