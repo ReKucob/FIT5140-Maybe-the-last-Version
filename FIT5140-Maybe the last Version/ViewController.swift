@@ -9,11 +9,12 @@
 import UIKit
 import MapKit
 
-class ViewController: UIViewController, DatabaseListener {
+//main page, contains the mapKit.
+class ViewController: UIViewController, DatabaseListener, CLLocationManagerDelegate {
 
+    //use a list to get all core data.
     var locationList: [LocationInfo] = []
     weak var databaseController: DatabaseProtocol?
-    
     
     @IBOutlet weak var mapView: MKMapView!
     override func viewDidLoad() {
@@ -23,12 +24,30 @@ class ViewController: UIViewController, DatabaseListener {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         databaseController = appDelegate.databaseController
         
+        // set the center area
         centerMapLocation(location: initialLocation)
-        
         mapView.delegate = self
-        
+      
+        //set geofence here to monitor the move.
+        for locations in locationList{
+            let centerArea = CLLocationCoordinate2D(latitude: locations.latitude, longitude: locations.longitude)
+            let geoLocation = CLCircularRegion(center: centerArea, radius: 500, identifier: locations.name!)
+            geoLocation.notifyOnExit = true
+        let locationManager = CLLocationManager()
+        locationManager.delegate = self
+        locationManager.requestAlwaysAuthorization()
+        locationManager.startMonitoring(for: geoLocation)
+        }
     }
     
+    //popup alert window about geofence
+    func locationManager(_ manager: CLLocationManager, didExitRegion: CLRegion) {
+        let alert = UIAlertController(title: "Movement Detected!", message: "You have left this historical sight", preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    //when view ill appear, set what will show on the screen.
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         databaseController?.addListener(listener: self)
@@ -47,10 +66,12 @@ class ViewController: UIViewController, DatabaseListener {
     
     var listenerType = ListenerType.locationinfo
     
+    // use  local list to get the core data from coredata and set in the local list.
     func onMapModelChange(change: DatabaseChange, historicals: [LocationInfo]) {
         locationList = historicals
     }
     
+    //Melbourne CBD's location
     let initialLocation = CLLocation(latitude: -37.8124, longitude: 144.9623)
     
     //set the distance for the view
@@ -63,6 +84,8 @@ class ViewController: UIViewController, DatabaseListener {
     }
     
 }
+
+//change the pin style on the screen and make sure whe user click the pin ,it will show different view to user.
 extension ViewController: MKMapViewDelegate {
     // 1
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {

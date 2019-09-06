@@ -5,6 +5,8 @@
 //  Created by Burns on 2/9/19.
 //  Copyright © 2019 Burns. All rights reserved.
 //
+//
+//This is the class to set the attributes of annotation which will be used in the ap to show pins.
 
 import UIKit
 import MapKit

@@ -148,10 +148,10 @@
                                 </attributedString>
                                 <color key="highlightedColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="5" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dtV-4C-jf7">
-                                <rect key="frame" x="20" y="410.5" width="356" height="20"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dtV-4C-jf7">
+                                <rect key="frame" x="20" y="410.5" width="374" height="190"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="dtV-4C-jf7" secondAttribute="height" multiplier="374:21" id="oQ6-PP-feS"/>
+                                    <constraint firstAttribute="height" constant="190" id="1qP-lJ-oHN"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="HiraMaruProN-W4" family="Hiragino Maru Gothic ProN" pointSize="20"/>
                                 <color key="textColor" red="0.36849829169999998" green="0.10119165049999999" blue="0.40153053259999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -193,6 +193,7 @@
                             <constraint firstItem="fcj-7C-7yY" firstAttribute="top" secondItem="5AX-tD-fyc" secondAttribute="bottom" constant="16" id="LC5-xj-YXE"/>
                             <constraint firstItem="5AX-tD-fyc" firstAttribute="top" secondItem="kSz-vj-zNc" secondAttribute="bottom" constant="20" id="N2F-s9-Muw"/>
                             <constraint firstItem="kSz-vj-zNc" firstAttribute="leading" secondItem="TLD-9L-YvM" secondAttribute="leading" constant="16" id="PXA-4y-BN0"/>
+                            <constraint firstItem="dtV-4C-jf7" firstAttribute="top" secondItem="fcj-7C-7yY" secondAttribute="bottom" constant="16" id="TMq-1n-baT"/>
                             <constraint firstItem="TLD-9L-YvM" firstAttribute="trailing" secondItem="5AX-tD-fyc" secondAttribute="trailing" constant="16" id="ZSE-oo-evQ"/>
                             <constraint firstItem="jUW-NE-m4y" firstAttribute="top" secondItem="7qh-cl-y9Y" secondAttribute="bottom" constant="16" id="dgb-ye-qL0"/>
                             <constraint firstItem="jUW-NE-m4y" firstAttribute="leading" secondItem="TLD-9L-YvM" secondAttribute="leading" constant="135" id="gI8-Wy-prY"/>
@@ -201,8 +202,8 @@
                             <constraint firstItem="TLD-9L-YvM" firstAttribute="trailing" secondItem="kSz-vj-zNc" secondAttribute="trailing" constant="16" id="m1X-cE-VqJ"/>
                             <constraint firstItem="dtV-4C-jf7" firstAttribute="leading" secondItem="TLD-9L-YvM" secondAttribute="leading" constant="20" id="pD9-4W-0fx"/>
                             <constraint firstItem="TLD-9L-YvM" firstAttribute="trailing" secondItem="7qh-cl-y9Y" secondAttribute="trailing" constant="16" id="pdy-dJ-XEH"/>
+                            <constraint firstItem="TLD-9L-YvM" firstAttribute="trailing" secondItem="dtV-4C-jf7" secondAttribute="trailing" constant="20" id="sDh-Ty-42o"/>
                             <constraint firstItem="fcj-7C-7yY" firstAttribute="leading" secondItem="TLD-9L-YvM" secondAttribute="leading" constant="16" id="ydV-Ji-TH6"/>
-                            <constraint firstItem="dtV-4C-jf7" firstAttribute="top" secondItem="fcj-7C-7yY" secondAttribute="bottom" constant="16" id="zfc-eS-LCA"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="TLD-9L-YvM"/>
                     </view>

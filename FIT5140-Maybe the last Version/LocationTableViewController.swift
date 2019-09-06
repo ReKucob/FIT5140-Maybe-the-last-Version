@@ -10,14 +10,15 @@ import UIKit
 import MapKit
 import CoreData
 
-class LocationTableViewController: UITableViewController, DatabaseListener{
+class LocationTableViewController: UITableViewController, DatabaseListener, CLLocationManagerDelegate{
     
 
     var locationList: [LocationInfo] = []
     var filterLocations: [LocationInfo] = []
     var viewController: ViewController?
     weak var databaseController: DatabaseProtocol?
-    
+  
+    //add a seachcontroller foe future search
     let searchController = UISearchController(searchResultsController: nil)
     
     override func viewDidLoad() {
@@ -68,6 +69,7 @@ class LocationTableViewController: UITableViewController, DatabaseListener{
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        //find the next cell by identifier.
         let cell = tableView.dequeueReusableCell(withIdentifier: "locationCell", for: indexPath) as! LocationTableViewCell
         if isFiltering(){
            locationList[indexPath.row] = filterLocations[indexPath.row]
@@ -92,6 +94,7 @@ class LocationTableViewController: UITableViewController, DatabaseListener{
         return true
     }
     
+    //when user click the 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.tableView!.deselectRow(at: indexPath, animated: true)
         let sight = self.locationList[indexPath.row]
@@ -119,7 +122,7 @@ class LocationTableViewController: UITableViewController, DatabaseListener{
         // Returns true if the text is empty or nil
         return searchController.searchBar.text?.isEmpty ?? true
     }
-    
+
     func filterContentForSearchText(_ searchText: String, scope: String = "All") {
         filterLocations = locationList.filter({( location : LocationInfo) -> Bool in
             return (location.name?.lowercased().contains(searchText.lowercased()))!

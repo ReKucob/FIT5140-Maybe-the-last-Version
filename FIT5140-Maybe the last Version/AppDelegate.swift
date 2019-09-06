@@ -18,10 +18,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var databaseController: DatabaseProtocol?
     var persistantContainer: NSPersistentContainer?
     
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         databaseController = CoreDataController()
 
+        //popup view of privacy-push notification
         registerForPushNotifications()
+        
+        
+        
+        
         return true
     }
     

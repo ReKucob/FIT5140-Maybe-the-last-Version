@@ -14,7 +14,6 @@
 		60640E29231FC7700039A69F /* CoreDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60640E28231FC7700039A69F /* CoreDataController.swift */; };
 		60640E2B231FEBE40039A69F /* MulticastDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60640E2A231FEBE40039A69F /* MulticastDelegate.swift */; };
 		6096FD0423224E6700D9B9D5 /* EditLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6096FD0323224E6700D9B9D5 /* EditLocationViewController.swift */; };
-		60A4B83F231DF166001FB33D /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A4B83E231DF166001FB33D /* CameraViewController.swift */; };
 		60A4B850231EC42D001FB33D /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A4B84F231EC42D001FB33D /* DetailsViewController.swift */; };
 		60DC1C56231D313100B12F1C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DC1C55231D313100B12F1C /* AppDelegate.swift */; };
 		60DC1C58231D313100B12F1C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DC1C57231D313100B12F1C /* ViewController.swift */; };
@@ -52,7 +51,6 @@
 		60640E28231FC7700039A69F /* CoreDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataController.swift; sourceTree = "<group>"; };
 		60640E2A231FEBE40039A69F /* MulticastDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MulticastDelegate.swift; sourceTree = "<group>"; };
 		6096FD0323224E6700D9B9D5 /* EditLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditLocationViewController.swift; sourceTree = "<group>"; };
-		60A4B83E231DF166001FB33D /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		60A4B84F231EC42D001FB33D /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
 		60DC1C52231D313100B12F1C /* FIT5140-Maybe the last Version.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "FIT5140-Maybe the last Version.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		60DC1C55231D313100B12F1C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -133,7 +131,6 @@
 				60DC1C5C231D313300B12F1C /* Assets.xcassets */,
 				60DC1C5E231D313300B12F1C /* LaunchScreen.storyboard */,
 				60DC1C61231D313300B12F1C /* Info.plist */,
-				60A4B83E231DF166001FB33D /* CameraViewController.swift */,
 				60A4B84F231EC42D001FB33D /* DetailsViewController.swift */,
 				6096FD0323224E6700D9B9D5 /* EditLocationViewController.swift */,
 				60DC1C87231D327100B12F1C /* LocationAnnotation.swift */,
@@ -291,7 +288,6 @@
 				60640E2B231FEBE40039A69F /* MulticastDelegate.swift in Sources */,
 				60DC1C86231D325100B12F1C /* NewLocationViewController.swift in Sources */,
 				60640E24231FC2FE0039A69F /* LocationInfo+CoreDataClass.swift in Sources */,
-				60A4B83F231DF166001FB33D /* CameraViewController.swift in Sources */,
 				60DC1C58231D313100B12F1C /* ViewController.swift in Sources */,
 				60DC1C56231D313100B12F1C /* AppDelegate.swift in Sources */,
 				60A4B850231EC42D001FB33D /* DetailsViewController.swift in Sources */,
@@ -482,7 +478,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "Burns.FIT5140-Maybe-the-last-Version";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -500,7 +496,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "Burns.FIT5140-Maybe-the-last-Version";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

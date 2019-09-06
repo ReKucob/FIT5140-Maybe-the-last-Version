@@ -179,36 +179,5 @@ class NewLocationViewController: UIViewController, CLLocationManagerDelegate,UII
         self.present(alertController, animated: true, completion: nil)
         
     }
-    
-    
-    
-    /*func save(locationName: String, locationDescription: String, latitude: Double, Longitude: Double)
-    {
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-            return
-        }
-        
-        let managedContext = appDelegate.persistentContainer.viewContext
-        
-        let entity = NSEntityDescription.entity(forEntitName: "LocationsMetaData", in: managedContext)!
-        
-        let historicalLocations = NSManagedObject(entity: entity, insertInto: managedContext)
-        
-        historicalLocations.setValue(locationName, value(forKeyPath: "locationName"))
-        historicalLocations.setValue(locationDescription, value(forKeyPath: "locationDescription"))
-        historicalLocations.setValue(latitude, value(forKeyPath: "latitude"))
-        historicalLocations.setValue(Longitude, value(forKeyPath: "Longitude"))
-        
-        
-        do{
-            try managedContext.save()
-            historicalLocation.append(historicalLocations)
-        }
-        catch let error as NSError {
-            print("Cannot save. \(error), \(error.userInfo)")
-        }
-        
-    }
- */
 }
 
