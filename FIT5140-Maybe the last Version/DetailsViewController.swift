@@ -68,7 +68,8 @@ class DetailsViewController: UIViewController {
             controller.editLocations = locationDetails
         }
     }
-    
+  
+    //
     func isPurnInt(string: String) -> Bool {
         let scan: Scanner = Scanner(string: string)
         var val:Int = 0

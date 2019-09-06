@@ -6,6 +6,10 @@
 //  Copyright © 2019 Burns. All rights reserved.
 //
 
+//This page gets some of codes from this website:
+//https://www.raywenderlich.com/548-mapkit-tutorial-getting-started
+
+
 import UIKit
 import MapKit
 

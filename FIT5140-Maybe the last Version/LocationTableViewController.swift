@@ -6,6 +6,8 @@
 //  Copyright © 2019 Burns. All rights reserved.
 //
 
+//Search function in this page come from this website: https://www.raywenderlich.com/472-uisearchcontroller-tutorial-getting-started
+
 import UIKit
 import MapKit
 import CoreData
