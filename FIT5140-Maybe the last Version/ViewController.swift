@@ -62,11 +62,6 @@ class ViewController: UIViewController, DatabaseListener {
         mapView.setRegion(coordinateRegion, animated: true)
     }
     
-    func focusOn(annotation: MKAnnotation){
-        mapView.selectAnnotation(annotation, animated: true)
-        let newCenter = MKCoordinateRegion(center: annotation.coordinate,latitudinalMeters: regionRadius, longitudinalMeters: regionRadius)
-        mapView.setRegion(newCenter, animated: true)
-    }
 }
 extension ViewController: MKMapViewDelegate {
     // 1

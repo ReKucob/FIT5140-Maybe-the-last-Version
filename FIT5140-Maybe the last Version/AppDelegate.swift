@@ -21,13 +21,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         databaseController = CoreDataController()
 
-        persistantContainer = NSPersistentContainer(name: "MapModel")
-        persistantContainer?.loadPersistentStores(){
-            (description, error) in
-            if let error = error{
-                fatalError("Failed to load Core Data stack:\(error)")
-            }
-        }
         registerForPushNotifications()
         return true
     }

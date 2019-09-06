@@ -116,8 +116,6 @@ class NewLocationViewController: UIViewController, CLLocationManagerDelegate,UII
                 fileManager.createFile(atPath: filePath, contents: data, attributes: nil)
             }
             
-            let newImage = NSEntityDescription.insertNewObject(forEntityName: "LocationInfo", into: managedObjectContext!) as! LocationInfo
-            newImage.photoName = "\(date)"
             
             let _ = databaseController!.addLocationInfo(name: titleTextView.text!, introduction: descriptionTextField.text!, latitude: Double(latitudeTextView.text!)!, longitude: Double(longitudeTextView.text!)!, iconName: segmentImageNameShift(currentSegement: iconSegmented.selectedSegmentIndex), photoName: "\(date)")
             navigationController?.popViewController(animated: true)

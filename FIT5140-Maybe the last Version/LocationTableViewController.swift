@@ -74,7 +74,7 @@ class LocationTableViewController: UITableViewController, DatabaseListener{
         }
         //set text into the table cell
         cell.titleLabel?.text = locationList[indexPath.row].name
-        cell.subtitleLabel?.text = locationList[indexPath.row].introduction
+        cell.subtitleLabel?.text = locationList[indexPath.row].iconName
         cell.imageLabel?.image = UIImage(named: locationList[indexPath.row].iconName!)
         return cell
     }
